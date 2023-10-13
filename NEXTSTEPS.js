@@ -21,7 +21,10 @@
   // X  -> add Supabase credentials
   // X  -> write schema
   // X  -> push to Supabase
+  // _  -> redo how times are saved
+  // _  -> set up nowPlaying to push
   // _  -> connection pooling?  
+  // _  -> have index.js call db
 
   // _ set up cron job for hourly scrape
   // _  -> move scrape functions to api point

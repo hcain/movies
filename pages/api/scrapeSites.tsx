@@ -83,12 +83,12 @@ const scrapeGoogle = async (movie: string, year: string) => {
     IMDbRating === undefined &&
     year === currentYear.toString()
   ) {
-    console.log(
-      "INSIDE 2023 didnt work",
-      rottenTomatoesRating,
-      IMDbRating,
-      year
-    );
+    // console.log(
+    //   "INSIDE 2023 didnt work",
+    //   rottenTomatoesRating,
+    //   IMDbRating,
+    //   year
+    // );
     return scrapeGoogle(movie, (currentYear - 1).toString());
   }
 
@@ -108,7 +108,7 @@ const scrapeGoogle = async (movie: string, year: string) => {
 };
 
 const upsertMovies = async (movies: movieTableType[]) => {
-  console.log("INSIDE UPSERT");
+  // console.log("INSIDE UPSERT");
   const updatedMovies = await prisma.$transaction(
     movies.map((movie) =>
       prisma.movie.upsert({
@@ -132,7 +132,7 @@ const upsertMovies = async (movies: movieTableType[]) => {
       })
     )
   );
-  console.log("INSIDE UPSERT", updatedMovies);
+  // console.log("INSIDE UPSERT", updatedMovies);
   return updatedMovies;
 };
 
@@ -210,12 +210,12 @@ const scrapeIFC = async () => {
     })
     .get();
 
-  console.log(lastDayNowPlaying);
-  console.log(getLastDayOfTheWeek("IFC"));
+  console.log("lastDayNowPlaying", lastDayNowPlaying);
+  console.log("last day of week", lastDayIFC);
   // scrape IFC specific movie pages for movies on the lastDayOfTheWeek
   console.log("length", lastDayNowPlaying.length);
   for (let i = 0; i < lastDayNowPlaying.length; i++) {
-    console.log("i", i);
+    // console.log("i", i);
     // TODO: filter out closed caption movies
     if (lastDayNowPlaying[i].page) {
       const htmlMovie = await axios.get(lastDayNowPlaying[i].page);
@@ -223,17 +223,17 @@ const scrapeIFC = async () => {
 
       const movieRunTime = $movieIFC('strong:contains("Running Time")')[0]?.next
         ?.data;
-      console.log(movieRunTime);
+      // console.log(movieRunTime);
       // lastDayNowPlaying[i].duration = movieRunTime;
 
       let movieYear = $movieIFC('strong:contains("Year")')[0]?.next?.data;
-      console.log("movieYear before", movieYear);
+      // console.log("movieYear before", movieYear);
       if (movieYear == undefined) {
         movieYear = new Date().toLocaleDateString("en-us", {
           year: "numeric",
         });
       }
-      console.log("movieYear after", movieYear);
+      // console.log("movieYear after", movieYear);
       // lastDayNowPlaying[i].year = movieYear;
 
       // scrape google with title and year
@@ -254,13 +254,13 @@ const scrapeIFC = async () => {
   console.log("MOVIES TO ADD", moviesToAdd);
 
   // PUSH movies to add to db and save id
-  // const moviesWithID = await upsertMovies(moviesToAdd);
+  const moviesWithID = await upsertMovies(moviesToAdd);
   // PUSH lastDayNowPlaying to db with movie ids from above
   const nowPlayingList: nowPlayingTableType[] = [];
   for (let i = 0; i < lastDayNowPlaying.length; i++) {
     for (let j = 0; j < lastDayNowPlaying[i].times.length; j++) {
       const nowPlaying = {
-        time: getMovieDateTime(lastDayNowPlaying[i].times[j].str),
+        time: getMovieDateTime(lastDayIFC, lastDayNowPlaying[i].times[j].str),
         captioning: lastDayNowPlaying[i].captioning,
         // TODO: soldOut functionality for IFC
         soldOut: false,
@@ -274,7 +274,7 @@ const scrapeIFC = async () => {
       nowPlayingList.push(nowPlaying);
     }
   }
-  console.log("NOW PLAYING LIST:", nowPlayingList);
+  // console.log("NOW PLAYING LIST:", nowPlayingList);
   // const createManyNowPlaying = await prisma.nowPlaying.createMany({
   //   data: nowPlayingList,
   // });
@@ -298,3 +298,52 @@ export default async function handler(
   // res.status(200).send(await scrapeIFC());
   res.status(200).send(await scrapeIFC());
 }
+
+
+
+// METROGRAPH CODE:
+// const scrapeMetrograph = async () => {
+//   // using https://allorigins.win/ as  server for production (https://github.com/Rob--W/cors-anywhere/issues/301)
+//   // '?nocache=${Date.now()}' at end of url prevents caching
+//   const html = await axios.get(
+//     "https://api.allorigins.win/get?url=https://metrograph.com/calendar/?nocache=${Date.now()}"
+//   );
+//   const $ = cheerio.load(html.data);
+//   const movieData = $(
+//     ".calendar-list-day .item .calendar-list-showtimes .title"
+//   ).map(function (i, element): movieType {
+//     const movieTitle = $(element);
+//     // console.log("METRO TITLE", movieTitle.text());
+//     const movieTimes = movieTitle
+//       .nextAll()
+//       .map(function (i, element) {
+//         // console.log("TIMES", element);
+//         return {
+//           str: $(element).text(),
+//           linkToTickets: $(element).prop("outerHTML"),
+//         };
+//       })
+//       .get();
+//     console.log("Metro times", movieTimes)
+//     const movieDate = movieTitle
+//       .parent()
+//       .parent()
+//       .parent()
+//       .parent()
+//       .parent()
+//       .children(".date")
+//       .text();
+//     // console.log("metro date", movieDate)
+//     return {
+//       title: movieTitle.text(),
+//       times: movieTimes,
+//       date: movieDate,
+//       theatre: "Metrograph",
+//       neighboorhood: "LES",
+//     };
+//   })
+//   .get();
+//   setMetrographMovies(movieData)
+//   // console.log("Metrograph", $);
+// };
+// // scrapeMetrograph();

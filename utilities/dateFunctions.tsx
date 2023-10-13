@@ -40,11 +40,11 @@ function ConvertTimeStringToDate(time: string | false) {
   return Date.parse(today + " " + time);
 }
 
-export function getMovieDateTime(timeStr: string) {
+export function getMovieDateTime(day: string, timeStr: string) {
 //   const militaryTime = ConvertTwelveToMiltaryTime("00:00", timeStr);
 //   const dateTime = ConvertTimeStringToDate(militaryTime).toISOString();
 //   return new Date(dateTime);
-console.log(timeStr, DateTime.fromFormat(timeStr, "ccc LLL dd"))
+console.log(timeStr, DateTime.fromFormat(day + " " + timeStr, "ccc LLL dd h:mm "))
 
 }
 
