@@ -274,11 +274,11 @@ const scrapeIFC = async () => {
       nowPlayingList.push(nowPlaying);
     }
   }
-  // console.log("NOW PLAYING LIST:", nowPlayingList);
-  // const createManyNowPlaying = await prisma.nowPlaying.createMany({
-  //   data: nowPlayingList,
-  // });
-  // console.log("CREATE MANY NOW PLAYING", createManyNowPlaying)
+  console.log("NOW PLAYING LIST:", nowPlayingList);
+  const createManyNowPlaying = await prisma.nowPlaying.createMany({
+    data: nowPlayingList,
+  });
+  console.log("CREATE MANY NOW PLAYING", createManyNowPlaying)
 
   // PUSH soldOut data of firstSixDaysNowPlaying to db
   // TODO: soldOut functionality for IFC

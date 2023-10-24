@@ -1,3 +1,5 @@
+import { last } from "cheerio/lib/api/traversing";
+
 const { DateTime } = require("luxon");
 
 // original from https://stackoverflow.com/a/28327336
@@ -44,7 +46,8 @@ export function getMovieDateTime(day: string, timeStr: string) {
 //   const militaryTime = ConvertTwelveToMiltaryTime("00:00", timeStr);
 //   const dateTime = ConvertTimeStringToDate(militaryTime).toISOString();
 //   return new Date(dateTime);
-console.log(timeStr, DateTime.fromFormat(day + " " + timeStr, "ccc LLL dd h:mm "))
+const withoutDay = day.split(" ").slice(1).join(" ")
+return DateTime.fromFormat(withoutDay + " " + timeStr.trim(), "MMM dd h:mm a").toISO()
 
 }
 
