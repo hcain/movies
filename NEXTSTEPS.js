@@ -22,7 +22,8 @@
   // X  -> write schema
   // X  -> push to Supabase
   // X  -> redo how times are saved
-  // X  -> set up nowPlaying to push
+  // X  -> set up nowPlaying last day to push
+  // _  -> push soldOut data to nowPlaying 
   // _  -> connection pooling?  
   // _  -> have index.js call db
 
