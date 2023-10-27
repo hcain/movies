@@ -47,4 +47,5 @@ model NowPlaying {
   theatreId         Int
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
+  @@unique([theatreId, movieId, time])
 }

@@ -277,6 +277,7 @@ const scrapeIFC = async () => {
   console.log("NOW PLAYING LIST:", nowPlayingList);
   const createManyNowPlaying = await prisma.nowPlaying.createMany({
     data: nowPlayingList,
+    skipDuplicates: true,
   });
   console.log("CREATE MANY NOW PLAYING", createManyNowPlaying)
 
