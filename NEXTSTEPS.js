@@ -6,7 +6,7 @@
   // X remove/color times that have already passed
   // X add dropdown selection for time, theatre, neighborhood
 
-  // X add Metrograph
+  // H ON HOLD add Metrograph 
   // X  -> set up scrape
   // X  -> parse scrape
   // _  -> move scrapings function to new file
@@ -15,20 +15,22 @@
   // X  -> add to table
   // X  -> check filtering functionality
 
-  // X set up hosted PostgreSQL DB
+  // _ set up hosted PostgreSQL DB
   // X  -> new project on Supabase
-  // X  -> add prisma for schema and access
+  // X  -> add prisma for schema and access 
   // X  -> add Supabase credentials
   // X  -> write schema
   // X  -> push to Supabase
   // X  -> redo how times are saved
   // X  -> set up nowPlaying last day to push
-  // _  -> push soldOut data to nowPlaying 
-  // _  -> connection pooling?  
+  // X  -> POSSIBLE BUG WHEN SAVING/CONVERTING TIME OF MOVIE (just converting to GMT from EST, looks correct though)
+  // H  -> ON HOLD (ticket page blocked, need proxy and more research): push soldOut data to nowPlaying (IFC scrape individual time link and search for "Select Ticket Quality")
+  // H  -> connection pooling?  
   // _  -> have index.js call db
+  // _  -> compare times to see if movie has passed
 
-  // _ set up cron job for hourly scrape
-  // _  -> move scrape functions to api point
+  // _ set up cron job for 12-hourly scrape
+  // X  -> move scrape functions to api point
   // _  -> connect data to hosted db
   // _  -> deploy to vercel
   // _  -> setup github actions
@@ -37,7 +39,6 @@
 
   // _ add additional dates by button outside of table (think "more" of search results)
   // _ then add column for IMDB, Rotten Tomatoes, Wiki
-  // _ add imdb api for above movie data 
   // _ then more movie theatres
 
   // CLEAN UP TODOs:
@@ -49,3 +50,4 @@
   // _ update parsing functions to just grab href using .prop('href') instead of using the whole a tag
   // _ make am/pm format of movie times uniform across theatres
   // _ convert prisma files to typescript 
+  // _ look up proper typescript for recursion (scrapeGoogle function)

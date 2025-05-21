@@ -1,12 +1,12 @@
-name: Hourly cron job
+name: Scrape sites at 1 AM
 on:
   schedule:
-    - cron: '*/60 * * * *'
+    - cron: '0 1 * * *'
 jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Hourly cron job
+      - name: Scrape sites
         run: |
           curl --request POST \
           --url 'https://example.com/api/task' \
