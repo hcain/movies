@@ -91,12 +91,12 @@ export function Table({ columns, data }:any) {
     return (
         <table {...getTableProps()}>
             <thead>
-                {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-                        {headerGroup.headers.map((column) => (
+                {headerGroups.map((headerGroup, i) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={i}>
+                        {headerGroup.headers.map((column, j) => (
                             <th
                                 {...column.getHeaderProps(column.getSortByToggleProps())}
-                                key={column.id}
+                                key={j}
                                 className={
                                     column.isSorted
                                         ? column.isSortedDesc
@@ -113,13 +113,13 @@ export function Table({ columns, data }:any) {
                 ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                {rows.map((row) => {
+                {rows.map((row, k) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()} key={row.id}>
-                            {row.cells.map((cell) => {
+                        <tr {...row.getRowProps()} key={k}>
+                            {row.cells.map((cell, l) => {
                                 return (
-                                    <td {...cell.getCellProps()} key={cell.value}>
+                                    <td {...cell.getCellProps()} key={l}>
                                         {cell.render("Cell")}
                                     </td>
                                 );
