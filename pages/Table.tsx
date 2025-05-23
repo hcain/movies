@@ -1,14 +1,55 @@
-import React, { useMemo } from "react";
+import React, { JSX, useMemo } from "react";
 import { useTable, useSortBy, useFilters } from "react-table";
 import styles from "../styles/Table.module.css";
 
-export const FilterForm = ({ column }) => {
+// interface nowPlayingType {
+//   id: number,
+//   time: string,
+//   captioning: boolean,
+//   soldOut: boolean,
+//   tickets: string,
+//   movieTitle: string,
+//   movieYear: string,
+//   movieId: number,
+//   theatreId: number,
+//   createdAt: string,
+//   updatedAt: string,
+//   movie: {
+//     id: number,
+//     title: string,
+//     year: string,
+//     imdb: string | null,
+//     rottenTomatoes:string | null,
+//     duration: string,
+//     trailer: string | null,
+//     createdAt: string,
+//     updatedAt: string
+//   },
+//   theatre: {
+//     id: number,
+//     name: string,
+//     neighborhood: string,
+//     address: string,
+//     website: string
+//   }
+// }
+
+// interface columnType {
+//   Header: string,
+//   accessor: string | ((row: nowPlayingType) => JSX.Element),
+//   disableFilters: boolean,
+//   disableSortBy?: boolean,
+//   Filter?: undefined
+
+// }
+
+export const FilterForm = ({ column }:any) => {
     const { filterValue, setFilter, preFilteredRows, id } = column;
 
     // Use preFilteredRows to calculate the options
     const options = useMemo(() => {
         const options = new Set();
-        preFilteredRows.forEach((row) => {
+        preFilteredRows.forEach((row:any) => {
             options.add(row.values[id]);
         });
         return [...options.values()];
@@ -26,7 +67,7 @@ export const FilterForm = ({ column }) => {
     );
 };
 
-export function Table({ columns, data }) {
+export function Table({ columns, data }:any) {
     // Use the useTable Hook to send the columns and data to build the table
     const {
         getTableProps, // table props from react-table
@@ -72,7 +113,7 @@ export function Table({ columns, data }) {
                 ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                {rows.map((row, i) => {
+                {rows.map((row) => {
                     prepareRow(row);
                     return (
                         <tr {...row.getRowProps()} key={row.id}>
