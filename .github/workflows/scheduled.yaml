@@ -5,9 +5,9 @@ on:
 jobs:
   cron:
     runs-on: ubuntu-latest
+    environment: production
     steps:
-      - name: Scrape sites
+      - name: Scrape sites 
         run: |
-          curl --request POST \
-          --url 'https://example.com/api/task' \
-          --header 'Authorization: Bearer ${{ secrets.ACTION_KEY }}'
+          curl --request GET \
+          --url 'https://example.com/api/task' 
