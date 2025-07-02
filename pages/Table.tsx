@@ -95,7 +95,7 @@ export function Table({ columns, data }:any) {
                     <tr {...headerGroup.getHeaderGroupProps()} key={i}>
                         {headerGroup.headers.map((column, j) => (
                             <th
-                                {...column.getHeaderProps(column.getSortByToggleProps())}
+                                {...column.getHeaderProps(column.ßs())}
                                 key={j}
                                 className={
                                     column.isSorted
