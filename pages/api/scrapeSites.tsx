@@ -9,7 +9,7 @@ interface movieFromTheatreType {
   title: string;
   captioning: boolean;
   year?: string;
-  page?: string | undefined;
+  page: string;
   times: Array<{ str: string; linkToTickets: string | undefined }>;
   date: string;
   theatre: string;
@@ -102,7 +102,7 @@ const scrapeIFC = async () => {
     .not(".show-coming-soon h3")
     .map(function (i, element): movieFromTheatreType {
       const movieTitle = $moviesIFC(element); // console.log(movieTitle.text());
-      const moviePage = movieTitle.children("a").prop("href");
+      const moviePage = movieTitle.children("a").prop("href") || "";
       const movieTimes = movieTitle
         .parent()
         .children(".times")
