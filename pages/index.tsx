@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Markup } from "interweave";
 import { ColumnDef, flexRender, SortingFn } from "@tanstack/react-table";
-import { Table } from "./TableNew";
+import Table from "./Table";
 import styles from "../styles/Home.module.css";
 import prisma from "../lib/prisma";
 import { validMovieTime, convertISOStringToTime } from "../utilities/dateFunctions";
