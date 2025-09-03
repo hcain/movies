@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Markup } from "interweave";
 import { ColumnDef, flexRender, SortingFn } from "@tanstack/react-table";
-import Table from "./Table";
+import Table from "../components/Table";
 import styles from "../styles/Home.module.css";
 import prisma from "../lib/prisma";
 import { validMovieTime, convertISOStringToTime } from "../utilities/dateFunctions";
@@ -77,7 +77,7 @@ export async function getStaticProps() {
     return { props: { todaysMoviesJSON } };
 }
 
-function Home({ todaysMoviesJSON }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ todaysMoviesJSON }: InferGetStaticPropsType<typeof getStaticProps>) {
     // const [allTheatresByDate, setAllTheatresByDate] = useState<Array<movieType>>([]);
     // console.log(todaysMoviesJSON);
 
@@ -166,9 +166,7 @@ function Home({ todaysMoviesJSON }: InferGetStaticPropsType<typeof getStaticProp
     // console.log(allTheatresByDate);
     return (
         <div className="Home">
-            <Table columns={columns} data={allTheatresByDate} />
+            {todaysMoviesJSON && <Table columns={columns} data={allTheatresByDate} />}
         </div>
     );
 }
-
-export default Home;
