@@ -27,9 +27,9 @@ const Table = <T extends object>({ data, columns }: ReactTableProps<T>) => {
             <table>
                 <thead>
                     {/* Render table headers */}
-                    {table.getHeaderGroups() && table.getHeaderGroups().map((headerGroup) => (
+                    {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
-                            {headerGroup.headers && headerGroup.headers.map((header) => (
+                            {headerGroup.headers.map((header) => (
                                 <th key={header.id}>
                                     {/* {header.isPlaceholder ? null : ( */}
                                     <div
@@ -66,9 +66,9 @@ const Table = <T extends object>({ data, columns }: ReactTableProps<T>) => {
                 </thead>
                 <tbody>
                     {/* Render table rows */}
-                    {table.getRowModel() && table.getRowModel().rows.map((row) => (
+                    {table.getRowModel().rows.map((row) => (
                         <tr key={row.id}>
-                            {row.getVisibleCells() && row.getVisibleCells().map((cell) => (
+                            {row.getVisibleCells().map((cell) => (
                                 <td key={cell.id}>
                                     {/* Render each cell's content */}
                                     {flexRender(
