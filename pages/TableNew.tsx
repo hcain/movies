@@ -13,29 +13,29 @@ interface ReactTableProps<T extends object> {
     columns: ColumnDef<T>[];
 }
 
-export const FilterForm = ({ column }: any) => {
-    const { filterValue, setFilter, preFilteredRows, id } = column;
+// export const FilterForm = ({ column }: any) => {
+//     const { filterValue, setFilter, preFilteredRows, id } = column;
 
-    // Use preFilteredRows to calculate the options
-    const options = useMemo(() => {
-        const options = new Set();
-        preFilteredRows.forEach((row: any) => {
-            options.add(row.values[id]);
-        });
-        return [...options.values()];
-    }, [id, preFilteredRows]);
+//     // Use preFilteredRows to calculate the options
+//     const options = useMemo(() => {
+//         const options = new Set();
+//         preFilteredRows.forEach((row: any) => {
+//             options.add(row.values[id]);
+//         });
+//         return [...options.values()];
+//     }, [id, preFilteredRows]);
 
-    return (
-        <select value={filterValue || ""} onChange={(e) => setFilter(e.target.value)}>
-            <option value="">All</option>
-            {options.map((option, i) => (
-                <option key={i} value={option}>
-                    {option}
-                </option>
-            ))}
-        </select>
-    );
-};
+//     return (
+//         <select value={filterValue || ""} onChange={(e) => setFilter(e.target.value)}>
+//             <option value="">All</option>
+//             {options.map((option, i) => (
+//                 <option key={i} value={option}>
+//                     {option}
+//                 </option>
+//             ))}
+//         </select>
+//     );
+// };
 
 export const Table = <T extends object>({ data, columns }: ReactTableProps<T>) => {
     const table = useReactTable({

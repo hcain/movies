@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Markup } from "interweave";
 import { ColumnDef, flexRender, SortingFn } from "@tanstack/react-table";
-import { Table, FilterForm } from "./TableNew";
+import { Table } from "./TableNew";
 import styles from "../styles/Home.module.css";
 import prisma from "../lib/prisma";
 import { validMovieTime, convertISOStringToTime } from "../utilities/dateFunctions";
@@ -150,14 +150,14 @@ function Home({ todaysMoviesJSON }: InferGetStaticPropsType<typeof getStaticProp
                 accessorKey: "theatre.name",
                 enableSorting: false, // disable sorting for this column
                 disableSortBy: true,
-                Filter: FilterForm,
+                // Filter: FilterForm,
             },
             {
                 header: "Neighborhood",
                 accessorKey: "theatre.neighborhood",
                 enableSorting: false, // disable sorting for this column
                 disableSortBy: true,
-                Filter: FilterForm,
+                // Filter: FilterForm,
             },
         ],
         []
