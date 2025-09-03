@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
+import { Text } from "domhandler";
 import prisma from "../../lib/prisma";
 import {
   getMovieDateTime,
@@ -164,12 +165,13 @@ const scrapeIFC = async () => {
       const htmlMovie = await axios.get(lastDayNowPlaying[i].page);
       const $movieIFC = cheerio.load(htmlMovie?.data);
 
-      const movieRunTime = $movieIFC('strong:contains("Running Time")')[0]?.next
-        ?.data;
+      // only Text Nodes have data attribute
+      const movieRunTime = ($movieIFC('strong:contains("Running Time")')[0]?.next as Text)?.data;
       // console.log(movieRunTime);
       lastDayNowPlaying[i].duration = movieRunTime;
 
-      let movieYear = $movieIFC('strong:contains("Year")')[0]?.next?.data;
+      // only Text Nodes have data attribute
+      let movieYear = ($movieIFC('strong:contains("Year")')[0]?.next as Text)?.data;
       // console.log("movieYear before", movieYear);
       if (movieYear == undefined) {
         movieYear = new Date().toLocaleDateString("en-us", {
@@ -230,6 +232,7 @@ const scrapeIFC = async () => {
 };
 
 import type { NextApiRequest, NextApiResponse } from "next";
+import { ChildrenNode } from "interweave";
 
 type Data = any;
 
