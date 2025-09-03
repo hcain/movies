@@ -1,5 +1,5 @@
 import React, { JSX, useMemo } from "react";
-import { useTable, useSortBy, useFilters } from "react-table";
+import { useReactTable, useSortBy, useFilters } from "@tanstack/react-table";
 import styles from "../styles/Table.module.css";
 
 // interface nowPlayingType {
