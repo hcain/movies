@@ -8,7 +8,6 @@ import styles from "../styles/Home.module.css";
 import prisma from "../lib/prisma";
 import { validMovieTime, convertISOStringToTime } from "../utilities/dateFunctions";
 import { stringify } from "querystring";
-import { NowPlaying } from "@prisma/client";
 const { DateTime } = require("luxon");
 
 // THIS INTERFACE NEEDS UPDATING
